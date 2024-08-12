@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Donas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .header {
+            background-color: #FF6B6B;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .productos-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .producto {
+            background-color: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
+        }
+
+        .producto img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .producto h3 {
+            margin: 10px 0;
+        }
+
+        .producto button {
+            background-color: #FF6B6B;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .carrito-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Tienda de Donas</h1>
+    </div>
+
+    <div class="productos-container">
+        <!-- Productos -->
+        <div class="producto">
+            <img src="dona1.jpg" alt="Dona 1">
+            <h3>Dona 1</h3>
+            <p>$1.50</p>
+            <button onclick="agregarAlCarrito('Dona 1', 1.50)">Añadir al Carrito</button>
+        </div>
+        <div class="producto">
+            <img src="dona2.jpg" alt="Dona 2">
+            <h3>Dona 2</h3>
+            <p>$1.25</p>
+            <button onclick="agregarAlCarrito('Dona 2', 1.25)">Añadir al Carrito</button>
+        </div>
+        <div class="producto">
+            <img src="dona3.jpg" alt="Dona 3">
+            <h3>Dona 3</h3>
+            <p>$1.75</p>
+            <button onclick="agregarAlCarrito('Dona 3', 1.75)">Añadir al Carrito</button>
+        </div>
+        <div class="producto">
+            <img src="dona4.jpg" alt="Dona 4">
+            <h3>Dona 4</h3>
+            <p>$2.00</p>
+            <button onclick="agregarAlCarrito('Dona 4', 2.00)">Añadir al Carrito</button>
+        </div>
+        <div class="producto">
+            <img src="dona5.jpg" alt="Dona 5">
+            <h3>Dona 5</h3>
+            <p>$1.80</p>
+            <button onclick="agregarAlCarrito('Dona 5', 1.80)">Añadir al Carrito</button>
+        </div>
+        <div class="producto">
+            <img src="dona6.jpg" alt="Dona 6">
+            <h3>Dona 6</h3>
+            <p>$2.10</p>
+            <button onclick="agregarAlCarrito('Dona 6', 2.10)">Añadir al Carrito</button>
+        </div>
+    </div>
+
+    <button class="carrito-btn" onclick="abrirCarrito()">Ver Carrito</button>
+
+    <script>
+        // Función para agregar un producto al carrito
+        function agregarAlCarrito(nombre, precio) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            // Verificar si el producto ya está en el carrito
+            let productoExistente = carrito.find(producto => producto.nombre === nombre);
+
+            if (productoExistente) {
+                // Si el producto ya existe, incrementar la cantidad
+                productoExistente.cantidad += 1;
+            } else {
+                // Si no existe, agregar un nuevo producto
+                carrito.push({ nombre: nombre, precio: precio, cantidad: 1 });
+            }
+
+            // Guardar el carrito actualizado en el Local Storage
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            alert('Producto añadido al carrito');
+        }
+
+        // Función para abrir el carrito en una nueva pestaña/ventana
+        function abrirCarrito() {
+            window.open('carrito.html', '_blank');
+        }
+    </script>
+</body>
+</html>
